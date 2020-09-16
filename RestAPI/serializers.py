@@ -7,7 +7,7 @@ class SignUpSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'name', 'email', 'password')
     
     def save(self):
-        account = Account(
+        account = SignUpModel(
             name = self.validated_data['name'],
             email = self.validated_data['email'],
             password = self.validated_data['password'],
