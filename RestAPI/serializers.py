@@ -15,3 +15,5 @@ class SignUpSerializer(serializers.HyperlinkedModelSerializer):
 
         account.save()
         return account
+
+

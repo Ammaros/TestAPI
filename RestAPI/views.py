@@ -12,11 +12,11 @@ class SignUpViewSet(viewsets.ModelViewSet):
     def create_auth(request):
         serialized = SignUpSerializer(data=request.DATA)
         if serialized.is_valid():
-            User.objects.create_user(
-                serialized.init_data['email'],
-                serialized.init_data['name'],
-                serialized.init_data['password']
-            )
-            return Response(serialized.data, status=status.HTTP_201_CREATED)
+            user = serialized.save()
+            if user:
+                token = Token.objects.create(user=user)
+                json = serialized.data
+                json['token'] = token.key
+                return Response(json)
         else:
-            return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serialized._errors)

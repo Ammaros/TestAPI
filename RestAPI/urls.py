@@ -11,5 +11,4 @@ router.register(r'signup', views.SignUpViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # path('users/register', 'myapp.views.create_auth'),
 ]
